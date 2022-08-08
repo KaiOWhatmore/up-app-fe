@@ -15,6 +15,15 @@ app.get('/api/transactions', (req, res) => {
     })
   });
 
+app.get('/api/transactions/categories', (req, res) => {
+  const request = unirest("GET", "http://localhost:8082/transactions/categories");
+  request.end(function (response) {
+      if (response.error) throw new Error(response.error);
+
+      res.json(response.body || {});
+  })
+});
+
 app.listen(port, () => {
 console.log(`Example app listening at http://localhost:${port}`)
 })
