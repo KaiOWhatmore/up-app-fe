@@ -13,6 +13,7 @@
     "browserify-fs": "^1.0.0",
     "browserify-zlib": "^0.2.0",
     "chart.js": "^3.9.1",
+    "chartjs-plugin-zoom": "^1.2.1",
     "components": "^0.1.0",
     "cors": "^2.8.5",
     "d3": "^7.6.1",

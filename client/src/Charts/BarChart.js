@@ -29,7 +29,7 @@ const BarChart = () => {
         .then((response) => {
           if (response.ok) {
             response.json().then((json) => {
-            //   console.log(json.data);
+            //   console.log(json.data;)
               setChart({data: json})
             });
           }

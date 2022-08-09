@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import zoomPlugin from 'chartjs-plugin-zoom';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -19,7 +20,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend, 
+  zoomPlugin
 );
 
 
@@ -60,11 +62,30 @@ const LineChart = () => {
      datasets: [{
        label: `${chart?.data?.length} Transactions Present`,
        data: chart?.data?.map(x => x.total),
-       borderWidth: 1
+       backgroundColor: 'rgba(0, 0, 0, 0.5)',
+       borderColor: 'rgb(128, 0, 0, 0.5)',
+       borderWidth: 0.5
      }]
    };
 
   let options = {
+    plugins: {
+      zoom: {
+        pan: {
+          enabled: true,
+          mode: 'xy'
+        },
+        zoom: {
+          wheel: {
+            enabled: true,
+          },
+          pinch: {
+            enabled: true,
+          },
+          mode: 'xy',
+        }
+      }
+    },
     maintainAspectRatio: false,
     scales: {
     },
@@ -79,7 +100,7 @@ const LineChart = () => {
     <div>
       <Line
         data={data}
-        height={400}
+        height={500}
         options={options}
       />
     </div>
