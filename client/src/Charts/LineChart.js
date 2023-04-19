@@ -20,14 +20,14 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend, 
+  Legend,
   zoomPlugin
 );
 
 
 const LineChart = () => {
 
-  const [chart, setChart] = useState({data: []})  
+  const [chart, setChart] = useState({ data: [] })
   let proxyUrl = "/api/transactions";
 
   useEffect(() => {
@@ -42,31 +42,31 @@ const LineChart = () => {
         .then((response) => {
           if (response.ok) {
             response.json().then((json) => {
-                let totalAmount = 0;
-                json.forEach(element => {
-                    totalAmount += Number(element.amount); 
-                    element.total = totalAmount;
-                })
-                setChart({data: json});
+              let totalAmount = 0;
+              json.forEach(element => {
+                totalAmount += Number(element.amount);
+                element.total = totalAmount;
+              })
+              setChart({ data: json });
             });
-        }
-    }).catch((error) => {
-        console.log(error);
-    });
+          }
+        }).catch((error) => {
+          console.log(error);
+        });
     };
     fetchTransactions()
-  }, [ proxyUrl])
+  }, [proxyUrl])
 
-   let data = {
-     labels: chart?.data?.map(x => x.settledAt),
-     datasets: [{
-       label: `${chart?.data?.length} Transactions Present`,
-       data: chart?.data?.map(x => x.total),
-       backgroundColor: 'rgba(0, 0, 0, 0.5)',
-       borderColor: 'rgb(128, 0, 0, 0.5)',
-       borderWidth: 0.5
-     }]
-   };
+  let data = {
+    labels: chart?.data?.map(x => x.settledAt),
+    datasets: [{
+      label: `${chart?.data?.length} Transactions Present`,
+      data: chart?.data?.map(x => x.total),
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+      borderColor: 'rgb(128, 0, 0, 0.5)',
+      borderWidth: 0.5
+    }]
+  };
 
   let options = {
     plugins: {

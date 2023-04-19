@@ -13,13 +13,13 @@ ChartJS.register(
 
 
 const BarChart = () => {
-    const [chart, setChart] = useState({data: []})  
-    let proxyUrl = "/api/transactions/categories";
+  const [chart, setChart] = useState({ data: [] })
+  let proxyUrl = "/api/transactions/categories";
 
 
   useEffect(() => {
     const fetchTransactions = async () => {
-        await fetch(`${proxyUrl}`, {
+      await fetch(`${proxyUrl}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -29,8 +29,7 @@ const BarChart = () => {
         .then((response) => {
           if (response.ok) {
             response.json().then((json) => {
-            //   console.log(json.data;)
-              setChart({data: json})
+              setChart({ data: json })
             });
           }
         }).catch((error) => {
@@ -44,7 +43,7 @@ const BarChart = () => {
   let data = {
     labels: chart?.data?.map(x => x.category),
     datasets: [{
-    //   label: `${chart?.data?.length} Coins Available`,
+      //   label: `${chart?.data?.length} Coins Available`,
       data: chart?.data?.map(x => x.count),
       backgroundColor: [
         'rgba(255, 99, 132, 0.2)',
