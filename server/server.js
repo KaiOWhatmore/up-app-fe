@@ -7,7 +7,7 @@ const port = 3001;
 app.use(cors()) 
 
 app.get('/api/transactions', (req, res) => {
-    const request = unirest("GET", "http://localhost:8082/transactions");
+    const request = unirest("GET", "http://localhost:8080/transactions");
     request.end(function (response) {
         if (response.error) throw new Error(response.error);
 
@@ -16,7 +16,7 @@ app.get('/api/transactions', (req, res) => {
   });
 
 app.get('/api/transactions/categories', (req, res) => {
-  const request = unirest("GET", "http://localhost:8082/transactions/categories");
+  const request = unirest("GET", "http://localhost:8080/transactions/categories");
   request.end(function (response) {
       if (response.error) throw new Error(response.error);
 
@@ -25,7 +25,7 @@ app.get('/api/transactions/categories', (req, res) => {
 });
 
 app.get('/api/transactions/monthly-savings', (req, res) => {
-  const request = unirest("GET", "http://localhost:8082/transactions/monthly-savings");
+  const request = unirest("GET", "http://localhost:8080/transactions/monthly-savings");
   request.end(function (response) {
       if (response.error) throw new Error(response.error);
 
@@ -34,7 +34,7 @@ app.get('/api/transactions/monthly-savings', (req, res) => {
 });
 
 app.get('/api/transactions/monthly-income', (req, res) => {
-  const request = unirest("GET", "http://localhost:8082/transactions/monthly-income");
+  const request = unirest("GET", "http://localhost:8080/transactions/monthly-income");
   request.end(function (response) {
       if (response.error) throw new Error(response.error);
 
@@ -43,7 +43,7 @@ app.get('/api/transactions/monthly-income', (req, res) => {
 });
 
 app.get('/api/transactions/monthly-expenses', (req, res) => {
-  const request = unirest("GET", "http://localhost:8082/transactions/monthly-expenses");
+  const request = unirest("GET", "http://localhost:8080/transactions/monthly-expenses");
   request.end(function (response) {
       if (response.error) throw new Error(response.error);
 

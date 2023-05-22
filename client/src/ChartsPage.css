@@ -1,0 +1,44 @@
+/* ChartsPage.css */
+
+/* Styling for the main container */
+.charts-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 20px 20px;
+  /* Adjusted padding-top to account for the height of the header */
+}
+
+/* Styling for the heading */
+.charts-page-container h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 20px; 
+}
+
+/* Styling for the unordered list */
+.charts-page-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Styling for the list items */
+.charts-page-container li {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Styling for the links */
+.charts-page-container a {
+  font-size: 18px;
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.charts-page-container a:hover {
+  text-decoration: underline;
+}

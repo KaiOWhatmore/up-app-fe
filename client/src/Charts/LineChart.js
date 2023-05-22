@@ -12,6 +12,7 @@ import {
 } from 'chart.js';
 
 import { Line } from 'react-chartjs-2';
+import './LineChart.css'
 
 ChartJS.register(
   CategoryScale,
@@ -75,6 +76,10 @@ const LineChart = () => {
           enabled: true,
           mode: 'xy'
         },
+        limits: {
+          x: 35000
+        
+        }, 
         zoom: {
           wheel: {
             enabled: true,
@@ -83,11 +88,29 @@ const LineChart = () => {
             enabled: true,
           },
           mode: 'xy',
+          minScale: 1, 
+          maxScale: 5
         }
       }
     },
     maintainAspectRatio: false,
     scales: {
+      // y: {
+      //   min: 0,
+      //   max: 10000
+      // },
+      // x: {
+      //   ticks: {
+      //     font: {
+      //       size: 18
+      //     },
+      //     maxRotation: 90,
+      //     minRotation: 90
+      //   },
+      //   grid: {
+      //     display: false
+      //   }
+      // }
     },
     legend: {
       labels: {
@@ -97,10 +120,10 @@ const LineChart = () => {
   }
 
   return (
-    <div>
+    <div className="chart-container">
       <Line
         data={data}
-        height={500}
+        height={null}
         options={options}
       />
     </div>

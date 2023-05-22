@@ -1,0 +1,25 @@
+/* AboutPage.css */
+
+/* Styling for the main container */
+.about-page-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 20px 20px; /* Adjusted padding-top to account for the height of the header */
+}
+
+
+/* Styling for the heading */
+.about-page-container h1 {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Styling for the paragraphs */
+.about-page-container p {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  text-align: justify;
+}
