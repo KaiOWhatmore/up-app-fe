@@ -8,6 +8,8 @@ import LineChart from './Charts/LineChart';
 import BarChart from './Charts/BarChart';
 import BarChartAmountPerMonth from './Charts/BarChartAmountPerMonth'
 import NavBar from "./NavBar";
+import LineChartRechart from "./charts-rechart/LineChartRechart"
+import LineGraphZoom from "./charts-rechart/LineGraphZoom"
 
 function App() {
 
@@ -16,12 +18,14 @@ function App() {
     {/* // <div className="App"> */}
         <NavBar/>
         <Routes>
+          <Route path="/chart-re" element={<LineChartRechart/>} />
           <Route path="/" element={<LandingPage />} />
           <Route path="/charts" element={<ChartsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/barcharts" element={<BarChart />} />
           <Route path="/graphs" element={<LineChart />} />
           <Route path="/barchartspermonth" element={<BarChartAmountPerMonth />} />
+          <Route path="/charts-zoom" element={[<LineGraphZoom/>]}/>
         </Routes>
         {/* </div> */}
     </Router>
