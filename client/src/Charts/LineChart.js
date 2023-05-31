@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import zoomPlugin from 'chartjs-plugin-zoom';
 import moment from 'moment'
 import {
@@ -34,44 +34,20 @@ const LineChart = () => {
 
   useEffect(() => {
     const fetchTransactions = async () => {
-      await fetch(`${proxyUrl}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': "*"
+      try {
+        const response = await fetch(proxyUrl);
+        
+        if (response.ok) {
+          const data = await response.json();
+          setChart({ data });
         }
-      })
-        .then((response) => {
-          if (response.ok) {
-            response.json().then((json) => {
-              setChart({ data: json });
-            });
-          }
-        }).catch((error) => {
-          console.log(error);
-        });
-    };
-    fetchTransactions()
-  }, [proxyUrl])
-
-  const formatChartData = () => {
-    const monthlyLabels = [];
-    const monthlyData = [];
-
-    chart.data.forEach((item) => {
-      const month = moment(item.settledAt).format('MMMM YY');
-      const monthIndex = monthlyLabels.indexOf(month);
-
-      if (monthIndex === -1) {
-        monthlyLabels.push(month);
-        monthlyData.push(item.runningTotalDouble);
-      } else {
-        monthlyData[monthIndex] += item.runningTotalDouble;
+      } catch (error) {
+        console.log(error);
       }
-    });
+    };
 
-    return { labels: monthlyLabels, data: monthlyData };
-  };
+    fetchTransactions();
+  }, [proxyUrl]);
 
 
   let data = {
