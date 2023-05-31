@@ -31,15 +31,20 @@ const LineChart = () => {
 
   const [chart, setChart] = useState({ data: [] })
   let proxyUrl = "/api/transactions/curt/runningTotal";
-
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await fetch(proxyUrl);
-        
-        if (response.ok) {
-          const data = await response.json();
-          setChart({ data });
+        const cachedData = localStorage.getItem("cachedChartData");
+        if (cachedData) {
+          const parsedData = JSON.parse(cachedData);
+          setChart({ data: parsedData });
+        } else {
+          const response = await fetch(proxyUrl);
+          if (response.ok) {
+            const data = await response.json();
+            setChart({ data });
+            localStorage.setItem("cachedChartData", JSON.stringify(data))
+          }
         }
       } catch (error) {
         console.log(error);
