@@ -54,18 +54,19 @@ const LineChart = () => {
     fetchTransactions();
   }, [proxyUrl]);
 
-
-  let data = {
-    labels: chart?.data?.map(x => moment(x.settledAt).format('MMM YY')),
-    datasets: [{
-      label: `${chart?.data?.length} Transactions Present`,
-      data: chart?.data?.map(x => x.runningTotalDouble),
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      borderColor: 'rgb(128, 0, 0, 0.5)',
-      borderWidth: 1,
-      tension: 0
-    }]
-  };
+  const data = useMemo(() => {
+    return {
+      labels: chart.data.map(x => moment(x.settledAt).format('MMM YY')),
+      datasets: [{
+        label: `${chart.data.length} Transactions Present`,
+        data: chart.data.map(x => x.runningTotalDouble),
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderColor: 'rgb(128, 0, 0, 0.5)',
+        borderWidth: 1,
+        tension: 0
+      }]
+    };
+  }, [chart.data]);
 
   const options = {
     maintainAspectRatio: false,
