@@ -73,24 +73,9 @@ const LineChart = () => {
     return { labels: monthlyLabels, data: monthlyData };
   };
 
-  const { labels, dataByMonth } = formatChartData();
-
-  const formattedXAxisData = (value, index, values) => {
-    const date = moment(value);
-    const prevDate = moment(values[index-1]);
-    const currtMonth = data.month() ;
-    const prevMonth = prevDate.month();
-
-    if (index === 0 || currtMonth != prevMonth) {
-      return date.format('MMM YY');
-    } else { 
-      return '';
-    }
-  }
 
   let data = {
     labels: chart?.data?.map(x => moment(x.settledAt).format('MMM YY')),
-    // labels: chart?.data?.map(x => x.settledAt).map,
     datasets: [{
       label: `${chart?.data?.length} Transactions Present`,
       data: chart?.data?.map(x => x.runningTotalDouble),
