@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import zoomPlugin from 'chartjs-plugin-zoom';
+import moment from 'moment'
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -53,15 +54,50 @@ const LineChart = () => {
     fetchTransactions()
   }, [proxyUrl])
 
+  const formatChartData = () => {
+    const monthlyLabels = [];
+    const monthlyData = [];
+
+    chart.data.forEach((item) => {
+      const month = moment(item.settledAt).format('MMMM YY');
+      const monthIndex = monthlyLabels.indexOf(month);
+
+      if (monthIndex === -1) {
+        monthlyLabels.push(month);
+        monthlyData.push(item.runningTotalDouble);
+      } else {
+        monthlyData[monthIndex] += item.runningTotalDouble;
+      }
+    });
+
+    return { labels: monthlyLabels, data: monthlyData };
+  };
+
+  const { labels, dataByMonth } = formatChartData();
+
+  const formattedXAxisData = (value, index, values) => {
+    const date = moment(value);
+    const prevDate = moment(values[index-1]);
+    const currtMonth = data.month() ;
+    const prevMonth = prevDate.month();
+
+    if (index === 0 || currtMonth != prevMonth) {
+      return date.format('MMM YY');
+    } else { 
+      return '';
+    }
+  }
+
   let data = {
-    labels: chart?.data?.map(x => x.settledAt),
+    labels: chart?.data?.map(x => moment(x.settledAt).format('MMM YY')),
+    // labels: chart?.data?.map(x => x.settledAt).map,
     datasets: [{
       label: `${chart?.data?.length} Transactions Present`,
       data: chart?.data?.map(x => x.runningTotalDouble),
       backgroundColor: 'rgba(0, 0, 0, 0.5)',
       borderColor: 'rgb(128, 0, 0, 0.5)',
       borderWidth: 1,
-      tension: 0.5
+      tension: 0
     }]
   };
 
@@ -107,8 +143,8 @@ const LineChart = () => {
 
   return (
     <div className="chart-container">
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '90vh' }}>
-        <div style={{ width: '1600px', height: '700px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div style={{ width: '1600px', height: '600px' }}>
           <Line
             data={data}
             options={options}
