@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "chartjs-plugin-crosshair": "^1.2.0",
     "moment": "^2.29.4",
     "react-zoom-pan-pinch": "^3.0.7"
   }
