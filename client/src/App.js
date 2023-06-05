@@ -9,7 +9,8 @@ import BarChart from './Charts/BarChart';
 import BarChartAmountPerMonth from './Charts/BarChartAmountPerMonth'
 import NavBar from "./NavBar";
 import LineChartRechart from "./charts-rechart/LineChartRechart"
-import LineGraphZoom from "./charts-rechart/LineGraphZoom"
+import Feed from "./Feed";
+import InfiniteScrollComponent from "./InfiniteScrollComponent"
 
 function App() {
 
@@ -25,7 +26,8 @@ function App() {
           <Route path="/barcharts" element={<BarChart />} />
           <Route path="/graphs" element={<LineChart />} />
           <Route path="/barchartspermonth" element={<BarChartAmountPerMonth />} />
-          <Route path="/charts-zoom" element={[<LineGraphZoom/>]}/>
+          <Route path="/transactions-scroll" element={<Feed/>}/>
+          <Route path="/scroll" element={<InfiniteScrollComponent/>}/>
         </Routes>
         {/* </div> */}
     </Router>
