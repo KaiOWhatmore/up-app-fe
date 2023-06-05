@@ -7,8 +7,8 @@ const LandingPage = () => {
     <div className="landing-page">
       <h2 className="title">Seymour</h2>
       <p className="description">An app for visualising your personal finances</p>
-      <Link to="/charts">
-        <button className="button">Charts</button>
+      <Link to="/scroll">
+        <button className="button">Transactions Feed</button>
       </Link>
     </div>
   );

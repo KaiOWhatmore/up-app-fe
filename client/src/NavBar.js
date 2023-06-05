@@ -6,7 +6,7 @@ import './NavBar.css'
 
 function NavBar() {
     return (
-            <header>
+        <header>
                 <img src={walletLogo} className="logo" alt="Logo" />
                 <nav>
                     <ul>

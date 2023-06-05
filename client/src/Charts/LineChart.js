@@ -110,14 +110,12 @@ const LineChart = () => {
 
   return (
     <div className="chart-container">
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <div style={{ width: '1600px', height: '600px' }}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '85vw', height: '70vh' }}>
           <Line
             data={data}
             options={options}
           />
         </div>
-      </div>
     </div>
   )
 }

@@ -2,7 +2,7 @@ import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
-const InfiniteScrollComponent = () => {
+const TransactionFeed = () => {
   const [scroll, setData] = useState({ data: [] });
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
@@ -63,7 +63,6 @@ const InfiniteScrollComponent = () => {
         {scroll.data.map(item => (
           <div key={item.id} style={{ padding: '20px', border: '1px solid gray', margin: '10px 0' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-            {/* const formattedDateTime = moment(dateTimeString).format('Do MMMM, YYYY, h:mma'); */}
               <div>{moment(item.createdAt).format('Do MMM, YY, h:mma')}</div>
               <div
                 onClick={() => handleExpandItem(item.id)}
@@ -90,4 +89,4 @@ const InfiniteScrollComponent = () => {
   );
 };
 
-export default InfiniteScrollComponent;
+export default TransactionFeed;
