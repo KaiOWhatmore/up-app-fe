@@ -1,41 +1,39 @@
+import moment from 'moment';
 import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 const InfiniteScrollComponent = () => {
-  const [data, setData] = useState([]);
+  const [scroll, setData] = useState({ data: [] });
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
-  // Simulated data fetching
+  let proxyUrl = "/api/transactions/curt/runningTotal";
   const fetchData = async () => {
     try {
-      let proxyUrl = "/api/transactions/curt/runningTotal";
-      // Make an API call to fetch data
-      const response = await fetch(proxyUrl);
-      const newData = await response.json();
-
-      // Update the data state
-      setData(prevData => [...prevData, ...newData]);
-
-      // Update the page number
-      setPage(prevPage => prevPage + 1);
-
-      // Check if there is more data available
-      if (newData.length === 0) {
-        setHasMore(false);
+      const cachedData = localStorage.getItem("cachedChartData");
+      if (cachedData) {
+        const parsedData = JSON.parse(cachedData);
+        setData({ data: parsedData });
+      } else {
+        const response = await fetch(proxyUrl);
+        if (response.ok) {
+          const data = await response.json();
+          setData({ data });
+          localStorage.setItem("cachedChartData", JSON.stringify(data))
+        }
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.log(error);
     }
   };
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [proxyUrl]);
+
 
   const handleLoadMore = () => {
-    if (data.length >= 50) {
+    if (scroll.data.length >= 50) {
       setHasMore(false);
       return;
     }
@@ -56,16 +54,17 @@ const InfiniteScrollComponent = () => {
   return (
     <div style={{ overflow: 'auto' }}>
       <InfiniteScroll
-        dataLength={data.length}
+        dataLength={scroll.data.length}
         next={handleLoadMore}
         hasMore={hasMore}
         loader={<h4>Loading...</h4>}
         endMessage={<p>No more data to load.</p>}
       >
-        {data.map(item => (
+        {scroll.data.map(item => (
           <div key={item.id} style={{ padding: '20px', border: '1px solid gray', margin: '10px 0' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
-              <div>{item.name}</div>
+            {/* const formattedDateTime = moment(dateTimeString).format('Do MMMM, YYYY, h:mma'); */}
+              <div>{moment(item.createdAt).format('Do MMM, YY, h:mma')}</div>
               <div
                 onClick={() => handleExpandItem(item.id)}
                 style={{
@@ -81,6 +80,7 @@ const InfiniteScrollComponent = () => {
             {expandedItems.includes(item.id) && (
               <div style={{ marginTop: '10px' }}>
                 <strong>Description:</strong> {item.description}
+                <strong>Value:</strong> {item.value}
               </div>
             )}
           </div>
