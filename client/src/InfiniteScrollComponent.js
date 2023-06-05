@@ -7,16 +7,26 @@ const InfiniteScrollComponent = () => {
   const [page, setPage] = useState(1);
 
   // Simulated data fetching
-  const fetchData = () => {
-    // Simulated API call delay
-    setTimeout(() => {
-      const newData = Array.from({ length: 10 }, (_, index) => {
-        const itemId = index + (page - 1) * 10;
-        return { id: itemId, name: `Item ${itemId}`, description: `Description ${itemId}` };
-      });
+  const fetchData = async () => {
+    try {
+      let proxyUrl = "/api/transactions/curt/runningTotal";
+      // Make an API call to fetch data
+      const response = await fetch(proxyUrl);
+      const newData = await response.json();
+
+      // Update the data state
       setData(prevData => [...prevData, ...newData]);
+
+      // Update the page number
       setPage(prevPage => prevPage + 1);
-    }, 1000);
+
+      // Check if there is more data available
+      if (newData.length === 0) {
+        setHasMore(false);
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
   };
 
   useEffect(() => {
