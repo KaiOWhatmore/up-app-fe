@@ -61,7 +61,7 @@ const TransactionFeed = () => {
         endMessage={<p>No more data to load.</p>}
       >
         {scroll.data.map(item => (
-          <div key={item.id} style={{ padding: '20px', border: '1px solid gray', margin: '10px 0' }}>
+          <div key={item.id} style={{ padding: '20px', border: '1px solid gray', margin: '15px' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
               <div>{moment(item.createdAt).format('Do MMM, YY, h:mma')}</div>
               <div
@@ -78,8 +78,8 @@ const TransactionFeed = () => {
             </div>
             {expandedItems.includes(item.id) && (
               <div style={{ marginTop: '10px' }}>
-                <strong>Description:</strong> {item.description}
-                <strong>Value:</strong> {item.value}
+                  <p style={{ textAlign: 'left' }}><strong>Description:</strong> {item.description}</p>
+                  <p style={{ textAlign: 'left' }}><strong>Value:</strong> {item.value}</p>
               </div>
             )}
           </div>
