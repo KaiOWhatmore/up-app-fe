@@ -7,7 +7,7 @@ const port = 3001;
 app.use(cors()) 
 
 app.get('/api/transactions/curt/runningTotal', (req, res) => {
-    const request = unirest("GET", "http://localhost:8080/transactions/curt/runningTotal");
+    const request = unirest("GET", "http://localhost:8080/transactions/basic/runningTotal");
     request.end(function (response) {
         if (response.error) throw new Error(response.error);
 
