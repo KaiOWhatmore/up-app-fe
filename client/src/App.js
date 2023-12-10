@@ -10,6 +10,7 @@ import BarChartAmountPerMonth from './Charts/BarChartAmountPerMonth'
 import NavBar from "./NavBar";
 import Feed from "./Feed";
 import TransactionFeed from "./InfiniteScrollComponent"
+import LandingPageBootstrap from "./LandingPageBootstrap"
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <Router>
     <div className="App">
         <NavBar/>
+        {/* <LandingPageBootstrap/> */}
         <div style={{marginTop: '15vh'}}>
         <Routes>
           <Route path="/" element={<LandingPage />} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="/barchartspermonth" element={<BarChartAmountPerMonth />} />
           <Route path="/transactions-scroll" element={<Feed/>}/>
           <Route path="/scroll" element={<TransactionFeed/>}/>
+          <Route path="/bootstrap" element={<LandingPageBootstrap/>}/>
         </Routes>
         </div>
       </div>
